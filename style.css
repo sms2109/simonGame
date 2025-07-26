@@ -1,0 +1,257 @@
+/* General Body Styles */
+body {
+    text-align: center;
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+    font-family: Arial, sans-serif; /* A more readable font for the web */
+    overflow: hidden; /* Prevent scrollbars from showing due to video overflow */
+    background-color: #1a1a2e; /* Dark fallback background if video fails to load */
+    color: white; /* Default text color for contrast with dark video background */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+/* Background Video Styling */
+.video-background {
+    position: fixed; /* Fixes the video to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Ensures video edges don't show scrollbars */
+    z-index: -1; /* Puts the video *behind* all other content */
+    display: flex; /* Use flex to help center the video content within its bounds */
+    justify-content: center;
+    align-items: center;
+}
+
+.video-background video {
+    min-width: 100%; /* Ensure video covers entire width */
+    min-height: 100%; /* Ensure video covers entire height */
+    width: auto; /* Allow video to scale proportionally */
+    height: auto; /* Allow video to scale proportionally */
+    object-fit: cover; /* This crops the video to fill the container while maintaining aspect ratio */
+}
+
+/* Optional: Add a subtle dark overlay for better text readability */
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Black with 40% opacity - adjust as needed */
+    z-index: 0; /* Make sure this is between video (-1) and content (1) */
+}
+
+
+/* Main Game Content Container - Place on top of the video */
+.game-content {
+    
+    position: relative; /* Crucial to bring content above the video */
+    z-index: 1; /* Ensures this content is *above* the video and its overlay */
+    padding: 20px; /* Add some padding around the game elements */
+    min-height: 100vh; /* Ensure content area takes full height of the viewport */
+    display: flex; /* Use flexbox to arrange content vertically */
+    flex-direction: column;
+    align-items: center; /* Center items horizontally within game-content */
+    justify-content: center; 
+    color: white; /* Ensure all default text inside is white */
+}
+
+
+/* Simon Game Specific Styles - Adjusted for visibility over video */
+h1 {
+    font-size: 2.5rem; /* Larger font size for main title */
+    margin-bottom: 1rem;
+    color: rgb(255, 255, 0); /* Bright neon pink color */
+    text-shadow: 0 0 15px rgba(163, 208, 15, 0.8), 0 0 25px rgba(255, 0, 255, 0.6); /* Stronger glow effect */
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #00ffff; /* Bright cyan color */
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.current, .score {
+    font-size: 2rem; /* Make current score and general messages more prominent */
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #00ff00; /* Bright green for score/status */
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+}
+
+/* Button-85 Styles (from your provided code) */
+.button-85 {
+    padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    /* background: #111; */ /* Removing this to let the gradient shine */
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-size: 1.2rem; /* Adjusted for responsiveness */
+    /* Adding a subtle background and shadow to make it pop against the video */
+    background: linear-gradient(to right, #8e2de2, #4a00e0); /* Retro-style gradient */
+    box-shadow: 0 0 20px rgba(142, 45, 226, 0.6); /* Soft glow */
+}
+
+.button-85:before {
+    content: "";
+    background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.button-85:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #222; /* Inner dark background */
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+
+/* Button Container (for Simon game buttons) */
+.btn-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center; /* Center the buttons vertically */
+    max-width: 600px; /* Limit the max width of the container for larger screens */
+    margin: 0 auto; /* Center the container itself */
+    gap: 1.5rem; /* Add space between buttons */
+}
+
+/* Individual Simon Game Buttons */
+.btn {
+    margin: 0.5rem;
+    width: 10rem;
+    height: 10rem;
+    border: 10px solid rgb(6, 10, 11);
+    border-radius: 20%;
+    display: flex; /* Use flexbox to center the numbers */
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem; /* Make the numbers inside the buttons larger */
+    font-weight: bold;
+    color: black; /* Numbers should be dark */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
+/* Specific Simon Button Colors */
+.yellow {
+    background-color: #f99b45;
+}
+.red {
+    background-color: #d95980;
+}
+.purple {
+    background-color: #819ff9;
+}
+.green {
+    background-color: #63aac0;
+}
+
+/* Flash Effects */
+.flash {
+    background-color: white; /* Keep original flash effect */
+}
+.userflash {
+    background-color: green; /* Keep original user flash effect */
+}
+
+/* Media Queries for Responsiveness */
+
+/* For screens smaller than 768px (common tablet portrait / large phone landscape) */
+@media screen and (max-width: 767px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+    .current, .score {
+        font-size: 1.8rem;
+    }
+    .btn {
+        width: 8rem; /* Make buttons slightly smaller */
+        height: 8rem;
+        border-width: 8px; /* Reduce border thickness */
+        font-size: 2.5rem;
+    }
+    .button-85 {
+        font-size: 1rem;
+        padding: 0.5em 1.5em;
+    }
+}
+
+/* For screens even smaller, like typical mobile phones */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1rem;
+    }
+    .current, .score {
+        font-size: 1.5rem;
+    }
+    .btn {
+        width: 6.5rem; /* Make buttons even smaller to fit better side-by-side */
+        height: 6.5rem;
+        border-width: 6px;
+        font-size: 2rem;
+    }
+    /* You can uncomment these lines if you prefer buttons to stack vertically on very small phones */
+    /* .btn-container {
+        flex-direction: column;
+        gap: 1rem;
+    } */
+}
+
