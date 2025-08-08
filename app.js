@@ -60,7 +60,7 @@ function checkAns(idx){
         }
     }
     else{
-        h2.innerHTML = `Game Over!Your score was <b>${level}!👏!</b><br><br><button class="button-85 start">Restart</button`;
+        h2.innerHTML = `Game Over!Your score was <b>${level}!👏Created by sksolanki!</b><br><br><button class="button-85 start">Restart</button`;
         maxScore(level);
         document.querySelector('body').style.backgroundColor = "red";
         setTimeout(function(){
