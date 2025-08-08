@@ -255,3 +255,10 @@ h2 {
     } */
 }
 
+
+@media (width <= 1250px) {
+  .hidden{
+     display: none;  
+    }
+   
+}
